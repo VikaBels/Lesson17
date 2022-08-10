@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Lesson17</string>
+    <string name="txt_btn_main_activity">Start thread</string>
+    <string name="string_for_thread">Yup!</string>
+</resources>
