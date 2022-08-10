@@ -15,7 +15,7 @@ class GeneralArea {
             synchronized(obj) {
                 obj.wait()
             }
-        } catch (e: Exception) {
+        } catch (e: InterruptedException) {
             println(e)
         }
     }
@@ -25,7 +25,7 @@ class GeneralArea {
             synchronized(obj) {
                 obj.notify()
             }
-        } catch (e: Exception) {
+        } catch (e: InterruptedException) {
             println(e)
         }
     }
