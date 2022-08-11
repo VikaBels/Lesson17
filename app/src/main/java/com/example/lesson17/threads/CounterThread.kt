@@ -7,7 +7,7 @@ import com.example.lesson17.R
 import com.example.lesson17.databinding.ActivityMainBinding
 import com.example.lesson17.models.GeneralArea
 
-class GetDigitOneToTenThread(
+class CounterThread(
     private val bindingMain: ActivityMainBinding?,
     private val threadWriter: WriteMessageThread,
     private val objGeneralArea: GeneralArea
@@ -29,18 +29,23 @@ class GetDigitOneToTenThread(
             sendDigit(i)
 
             if (i == FINAL_NUMBER) {
-                Thread.sleep(100)
+                sleepThread(100)
+
                 handler.post {
                     setButtonEnable()
                 }
                 objGeneralArea.stopAllThread()
             }
 
-            try {
-                Thread.sleep(5000)
-            } catch (ex: InterruptedException) {
-                println(ex)
-            }
+            sleepThread(5000)
+        }
+    }
+
+    private fun sleepThread(millis: Long) {
+        try {
+            Thread.sleep(millis)
+        } catch (ex: InterruptedException) {
+            println(ex)
         }
     }
 

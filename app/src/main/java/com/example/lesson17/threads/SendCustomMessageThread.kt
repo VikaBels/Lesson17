@@ -2,16 +2,16 @@ package com.example.lesson17.threads
 
 import com.example.lesson17.models.GeneralArea
 
-class GetStringThread(
+class SendCustomMessageThread(
     private val threadWriter: WriteMessageThread,
     private val objGeneralArea: GeneralArea,
-    private val text: String
+    private val message: String
 ) : Runnable {
 
     override fun run() {
         while (!objGeneralArea.shouldExit) {
             putSleepThread()
-            sendString()
+            sendMessage()
         }
     }
 
@@ -19,7 +19,7 @@ class GetStringThread(
         objGeneralArea.waitThread()
     }
 
-    private fun sendString() {
-        threadWriter.appendMessage(text)
+    private fun sendMessage() {
+        threadWriter.appendMessage(message)
     }
 }

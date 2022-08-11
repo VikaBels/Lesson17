@@ -7,9 +7,9 @@ import androidx.core.content.ContextCompat
 import com.example.lesson17.R
 import com.example.lesson17.databinding.ActivityMainBinding
 import com.example.lesson17.models.GeneralArea
-import com.example.lesson17.threads.GetDigitOneToTenThread
-import com.example.lesson17.threads.GetSimpleDigitThread
-import com.example.lesson17.threads.GetStringThread
+import com.example.lesson17.threads.CounterThread
+import com.example.lesson17.threads.FindSimpleDigitThread
+import com.example.lesson17.threads.SendCustomMessageThread
 import com.example.lesson17.threads.WriteMessageThread
 
 class MainActivity : AppCompatActivity() {
@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
     private fun clickListenerBtnStart() {
         bindingMain?.btnStartThreads?.setOnClickListener {
             setBtnStartDisable()
-            startAllThread()
+            startAllThreads()
         }
     }
 
@@ -42,15 +42,15 @@ class MainActivity : AppCompatActivity() {
         bindingMain?.container?.movementMethod = ScrollingMovementMethod()
     }
 
-    private fun startAllThread() {
+    private fun startAllThreads() {
         val objectGeneralArea = GeneralArea()
 
         val objectThreadWriter = WriteMessageThread(bindingMain, objectGeneralArea)
-        val runnableSimpleDigit = GetSimpleDigitThread(objectThreadWriter, objectGeneralArea)
+        val runnableSimpleDigit = FindSimpleDigitThread(objectThreadWriter, objectGeneralArea)
         val runnableDigit =
-            GetDigitOneToTenThread(bindingMain, objectThreadWriter, objectGeneralArea)
+            CounterThread(bindingMain, objectThreadWriter, objectGeneralArea)
         val runnableString =
-            GetStringThread(
+            SendCustomMessageThread(
                 objectThreadWriter,
                 objectGeneralArea,
                 resources.getString(R.string.string_for_thread)
@@ -58,11 +58,11 @@ class MainActivity : AppCompatActivity() {
 
         Thread(objectThreadWriter).start()
 
+        Thread(runnableString).start()
+
         Thread(runnableSimpleDigit).start()
 
         Thread(runnableDigit).start()
-
-        Thread(runnableString).start()
     }
 
     private fun setBtnStartDisable() {

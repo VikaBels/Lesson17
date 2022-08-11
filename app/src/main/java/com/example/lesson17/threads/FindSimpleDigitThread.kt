@@ -2,7 +2,7 @@ package com.example.lesson17.threads
 
 import com.example.lesson17.models.GeneralArea
 
-class GetSimpleDigitThread(
+class FindSimpleDigitThread(
     private val threadWriter: WriteMessageThread,
     private val objGeneralArea: GeneralArea
 ) : Runnable {

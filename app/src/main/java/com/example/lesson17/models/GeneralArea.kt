@@ -5,6 +5,7 @@ class GeneralArea {
 
     @Volatile
     var shouldExit = false
+        private set
 
     fun stopAllThread() {
         shouldExit = true
